@@ -12,6 +12,7 @@ The core objective of this deployment is to isolate sensitive backend assets whi
 *   **Presentation Tier (AppServer):** A public-facing Ubuntu virtual machine running Apache 2 and configured with an optimized PHP runtime to host the ownCloud interface.
 *   **Data Tier (DBServer):** A completely isolated backend Ubuntu instance hosting the MySQL database server, restricted to a private subnet with no assigned public endpoints.
 *   **Network Security Layers:** Strict ingress and egress boundaries enforced through distinct Network Security Groups (NSGs) mapping granular TCP rules.
+*   
 +-------------------------------------------------------+
 |                    VIRTUAL NETWORK                    |
 |                     10.0.0.0/16                       |
