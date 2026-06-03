@@ -12,22 +12,26 @@ The core objective of this deployment is to isolate sensitive backend assets whi
 *   **Presentation Tier (AppServer):** A public-facing Ubuntu virtual machine running Apache 2 and configured with an optimized PHP runtime to host the ownCloud interface.
 *   **Data Tier (DBServer):** A completely isolated backend Ubuntu instance hosting the MySQL database server, restricted to a private subnet with no assigned public endpoints.
 *   **Network Security Layers:** Strict ingress and egress boundaries enforced through distinct Network Security Groups (NSGs) mapping granular TCP rules.
-*   
-+-------------------------------------------------------+
-|                    VIRTUAL NETWORK                    |
-|                     10.0.0.0/16                       |
-|                                                       |
-|  +-----------------------+     +-------------------+  |
-|  |     PUBLIC SUBNET     |     |  PRIVATE SUBNET   |  |
-|  |     10.0.1.0/24       |     |   10.0.2.0/24     |  |
-|  |                       |     |                   |  |
-|  |  [App Web Server]     |====>|  [MySQL Database] |  |
-|  |  Ports: 22, 80        |     |  Ports: 22, 3306  |  |
-|  +-----------▲-----------+     +---------▲---------+  |
-+--------------|---------------------------|------------+
-|                           |
-[Web Browser]               [NAT Gateway]
----
+
+```text
+                  ┌────────────────────────────────────────┐
+                  │            Virtual Network             │
+                  │              (10.0.0.0/16)             │
+                  │                                        │
+                  │   ┌────────────────────────────────┐   │
+                  │   │         Public Subnet          │   │
+                  │   │        (10.0.1.0/24)           │   │
+[Web Browser] ───┼──>│  [Application Web Server]     │   │
+                  │   │  Ports Allowed: 22, 80         │   │
+                  │   └────────────────▲───────────────┘   │
+                  │                    │                   │
+                  │   ┌────────────────┼───────────────┐   │
+                  │   │         Private Subnet         │   │
+                  │   │        (10.0.2.0/24)           │   │
+                  │   │  [Database Service (MySQL)]    │   │
+                  │   │  Ports Allowed: 22, 3306       │   │
+                  │   └────────────────────────────────┘   │
+                  └────────────────────────────────────────┘
 
 ## 🛠️ Key Technical Proficiencies Demonstrated
 
